@@ -1,29 +1,35 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  useFonts({
+    'outfit-thin' : require('@/assets/fonts/Outfit-Thin.ttf'),
+    'outfit-regular' : require('@/assets/fonts/Outfit-Regular.ttf'),
+    'outfit-medium' : require('@/assets/fonts/Outfit-Medium.ttf'),
+    'outfit-semiBold' : require('@/assets/fonts/Outfit-SemiBold.ttf'),
+    'outfit-bold' : require('@/assets/fonts/Outfit-Bold.ttf'),
+    'outfit-extraBold' : require('@/assets/fonts/Outfit-ExtraBold.ttf'),
+    'sifonn' : require('@/assets/fonts/Sifonn.otf'),
+    'telex' : require('@/assets/fonts/Telex-Regular.ttf'),
+    'roboto' : require('@/assets/fonts/Roboto.ttf'),
+    'roboto-italic' : require('@/assets/fonts/Roboto-Italic.ttf'),
+    'poppins-regular' : require('@/assets/fonts/Poppins-Medium.ttf'),
+    'poppins-semiBold' : require('@/assets/fonts/Poppins-SemiBold.ttf'),
+    'poppins-bold' : require('@/assets/fonts/Poppins-Bold.ttf'),
+    'amazon-medium' : require('@/assets/fonts/Amazon Ember Display Medium.ttf'),
+    'amazon-light' : require('@/assets/fonts/Amazon Ember Light.ttf'),
+    'amazon-regular' : require('@/assets/fonts/Amazon Ember.ttf'),
+    'amazon-bold' : require('@/assets/fonts/Amazon Ember V2 Bold.ttf'),
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+  })
+  return(
+    <>
+      <StatusBar backgroundColor="black"/>
+       <Stack>
+        <Stack.Screen name="index" options={{headerShown:false}}/>
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    </>
+    
+   
+  )
 }
