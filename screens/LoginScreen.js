@@ -28,7 +28,7 @@ const LoginScreen = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const token = await AsyncStorage.getItem("authtoken");
+        const token = await AsyncStorage.getItem("authToken");
         console.log("After Login AsyncStrg  Token :  ", token);
         if (token) {
           navigation.replace("Main");
@@ -55,7 +55,7 @@ const LoginScreen = () => {
         const token = response.data.token;
 
         //It is for to save that JWT key given from response
-        AsyncStorage.setItem("authtoken", token);
+        AsyncStorage.setItem("authToken", token);
         navigation.replace("Main");
         console.log("While Login Token Async : ", token);
       })

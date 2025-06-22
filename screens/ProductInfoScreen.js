@@ -1,4 +1,4 @@
-import Feather from "@expo/vector-icons/Feather";
+
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Image,
@@ -18,12 +18,18 @@ import {
 } from "react-native-responsive-screen";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
+import { addToCart } from "@/Reducer/CartReducer";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductInfoScreen = ({ route }) => {
   const {
     //Using Destructure
+    item,
     id,
     title,
     offer,
@@ -34,6 +40,30 @@ const ProductInfoScreen = ({ route }) => {
     color,
     size,
   } = route.params;
+
+  const dispatch = useDispatch();
+
+  const [addedToCart , setAddedToCart] = useState(false)
+
+  const addItemToCart = (itemArgs)=>{
+    setAddedToCart(true);
+    dispatch(addToCart(itemArgs));
+
+    setTimeout(()=>{
+      setAddedToCart(false)
+    },60000)//  1 Mins later
+
+  }
+
+
+  const cart = useSelector((state)=>state.cart.cart)
+  useEffect(() => {
+    if (cart.length > 0) {
+      console.log("Cart Selector Box123 :", cart);
+    }
+  }, [cart]); 
+ 
+
 
   return (
     <View
@@ -99,8 +129,9 @@ const ProductInfoScreen = ({ route }) => {
           >
             <Text
               style={{
-                fontFamily: "outfit-semiBold",
+                fontFamily: "amazon-bold",
                 color: "#2e2e2e",
+                fontSize: wp(3.4),
               }}
             >
               Mukesh Y
@@ -253,7 +284,7 @@ const ProductInfoScreen = ({ route }) => {
                 marginRight: wp(1),
               }}
             >
-              -{offer.split("off")[0]}
+              -{offer?.split("off")[0]}
             </Text>
 
             <Text
@@ -417,16 +448,18 @@ const ProductInfoScreen = ({ route }) => {
             alignItems: "center",
           }}
         >
+          {/* Below item means route.param.item //Destructerd */}
           <Pressable
+            onPress={() => addItemToCart(item)}
             style={{
-              backgroundColor: "#fadc03",
+              backgroundColor: addedToCart?"#d6d6d6":"#fadc03",
               width: wp(85),
               height: hp(5.8),
               alignItems: "center",
               justifyContent: "center",
               borderRadius: wp(20),
-              marginBottom:hp(3)
-            }}
+              marginBottom: hp(3),
+            }} 
           >
             <Text
               style={{
@@ -434,7 +467,7 @@ const ProductInfoScreen = ({ route }) => {
                 fontSize: wp(3.8),
               }}
             >
-              Add to Cart
+              {addedToCart?'Added to the Cart' :'Add to cart' }
             </Text>
           </Pressable>
 

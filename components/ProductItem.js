@@ -3,17 +3,46 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addToCart } from '@/Reducer/CartReducer';
+import { useEffect, useState } from "react";
 
 const ProductItem = ({ item }) => {
+
+  const dispatch = useDispatch();
+  const [addedToCart , setAddedToCart] = useState(false)
+  const cartInfo = useSelector((state)=>state.cart.cart)
+
+  useEffect(() => {
+    if (cartInfo.length > 0) {
+      console.log("Cart Selector Box123 :", cartInfo);
+    }
+  }, [cartInfo]); 
+
+  const addItemToCart = (itemArgs)=>{
+      setAddedToCart(true);
+      dispatch(addToCart(itemArgs));
+  
+      setTimeout(()=>{
+        setAddedToCart(false)
+      },5000)//  1 Mins later
+  
+    }
+   
+  
   return (
     <Pressable
       style={{
-        marginHorizontal: wp(5.5),
+        marginHorizontal: wp(4.2),
         height: hp(32),
         justifyContent: "center",
         marginBottom: hp(5),
         alignItems: "center",
-        // backgroundColor:'gray'
+        paddingLeft:wp(2.6)
+        // flexWrap:'wrap'
+
+        
       }}
     >
       <Image
@@ -50,12 +79,12 @@ const ProductItem = ({ item }) => {
       >
         <Text
           style={{
-            fontFamily: "poppins-regular",
+            fontFamily: "amazon-regular",
             fontSize: wp(3.2),
             color:'#6c6c6c'
           }}
         >
-          ₹{Math.floor(item?.price * 25)}
+          ₹{Math.floor(item?.price )}
         </Text>
         <Text
           style={{
@@ -68,7 +97,8 @@ const ProductItem = ({ item }) => {
         </Text>
       </View>
 
-      <Pressable style={{
+      <Pressable onPress={()=>addItemToCart(item)}
+       style={{
         marginTop:hp(1),
         paddingVertical:hp(1.2),
         paddingHorizontal:wp(5.2),
@@ -76,13 +106,13 @@ const ProductItem = ({ item }) => {
         borderRadius:wp(10),
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#ffde0a'
+        backgroundColor: addedToCart?'#d6d6d6':'#ffde0a'
       }}>
           <Text style={{
             fontFamily:'poppins-regular',
             fontSize:wp(3.5),
             color:'#464646'
-          }}>Add to Cart</Text>
+          }}>{addedToCart?'Added to Cart':'Add to Cart'} </Text>
       </Pressable>
     </Pressable>
   );

@@ -1,6 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import AddAddressScreen from '../screens/AddAddressScreen';
+import AddressScreen from '../screens/AddressScreen';
 import CartScreen from '../screens/CartScreen';
+import ConfirmationScreen from '../screens/ConfirmationScreen';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import ProductInfoScreen from '../screens/ProductInfoScreen';
@@ -85,6 +89,9 @@ export default function StackNavigator() {
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="Info" component={ProductInfoScreen} />
         <Stack.Screen name="Main" component={BottomTabs} />
+        <Stack.Screen name = "Address" component={AddAddressScreen}/>
+        <Stack.Screen name = "Add" component={AddressScreen}/>
+        <Stack.Screen name= "ConfirmScreen" component={ConfirmationScreen}/>
         {/* Add more screens here */}
     </Stack.Navigator>
   )

@@ -31,6 +31,7 @@ mongoose
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
+
 //Endpoint to Register a app
 
 const User = require("./models/user");
@@ -133,7 +134,7 @@ app.post("/login", async (req, res) => {
   try {
     // Find the user by email
     const { email, password } = req.body;
-    const user = await User.findOne({ email });  //{email:"mukesh148y@gmail.com"}
+    const user = await User.findOne({ email }); //{email:"mukesh148y@gmail.com"}
     if (!user) {
       return res.status(401).json({ message: "User not found" });
     }
@@ -153,3 +154,73 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+//End Point to store new user's address part
+
+app.post("/address", async (req, res) => {
+  try {
+    const { userId, address } = req.body;
+    
+    
+    // Find the user by ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Add the new address to the user's addresses array
+    user.addresses.push(address);
+    // Save the updated user document
+    await user.save();
+    res.status(200).json({ message: "Address added successfully", user });
+  } catch (error) {
+    console.error("Error adding address:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+// Endpoint to get all addresses of a user
+
+app.get("/address/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    console.log("🔍 Received userId123:", userId);
+
+    const user = await User.findById(userId);
+    console.log("👤 Found user123:", user);
+
+    
+    if (!user) {
+      return res
+                .status(404)
+                .json({ message: "ERROR!: There is no User to Retrive the Address" });
+        
+    }
+
+    const addresses = user.addresses;
+    res.json({ addresses: user.addresses || [] });
+    console.log("Value getted from index.js api is :  ", addresses)
+    
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving the address" });
+  }
+});
+
+
+
+
+
+
+
+// ✅ 404 logging middleware (put this LAST)
+app.use((req, res) => {
+  console.log("❌ Route not found:", req.method, req.url);
+  res.status(404).send("Route not found");
+});
+
+app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
+
+
+
+
+
