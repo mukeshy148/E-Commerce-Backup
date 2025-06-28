@@ -31,7 +31,6 @@ mongoose
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
-
 //Endpoint to Register a app
 
 const User = require("./models/user");
@@ -160,8 +159,7 @@ app.post("/login", async (req, res) => {
 app.post("/address", async (req, res) => {
   try {
     const { userId, address } = req.body;
-    
-    
+
     // Find the user by ID
     const user = await User.findById(userId);
     if (!user) {
@@ -189,28 +187,105 @@ app.get("/address/:userId", async (req, res) => {
     const user = await User.findById(userId);
     console.log("👤 Found user123:", user);
 
-    
     if (!user) {
       return res
-                .status(404)
-                .json({ message: "ERROR!: There is no User to Retrive the Address" });
-        
+        .status(404)
+        .json({ message: "ERROR!: There is no User to Retrive the Address" });
     }
 
     const addresses = user.addresses;
     res.json({ addresses: user.addresses || [] });
-    console.log("Value getted from index.js api is :  ", addresses)
-    
+    console.log("Value getted from index.js api is :  ", addresses);
   } catch (error) {
     res.status(500).json({ message: "Error retrieving the address" });
   }
 });
 
+//End-Point to store all the Orders
+app.post("/orders", async (req, res) => {
 
+  
+  try {
+    const { userId, cartItems, totalPrice, shippingAddress, paymentMethod } =
+      req.body;
 
+      console.log("✅ Incoming Order Data:", req.body);
 
+    const user = await User.findById(userId);
+    if (!user) {
+      return res
+        .status(500)
+        .json({ message: "User not founfd while Placing a Order" });
+    }
 
+    // Create a Array of Products obj from Cart Items
+    const products = cartItems.map((item) => ({
+      name: item?.title,
+      quantity: item.quantity,
+      price: item.price,
+      image: item?.image,
+    }));
 
+    // Now Storing to real Order DB
+    const order = new Order({
+      user: userId,
+      cartItems: products,
+      totalPrice: totalPrice,
+      shippingAddress: {
+        name: shippingAddress.name,
+        address: `${shippingAddress.street}, ${shippingAddress.houseNo}`,
+        houseNo: shippingAddress.houseNo,
+        landmark: shippingAddress.landmark,
+        postalCode: shippingAddress.postalCode,
+      },
+      paymentMethod: paymentMethod,
+    });
+
+    await order.save();
+
+    res.status(200).json({ message: "Order Placed succeesfully..." });
+  } catch (error) {
+    res.status(500).json({ message: "Error to Place Orders" });
+  }
+});
+
+//end-point to get User Profile Details
+
+app.get("/profile/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res
+        .status(500)
+        .json({ message: "User Not found while fetching User Profile" });
+    }
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ message: "Error occured in Profile Fetch Part" });
+  }
+});
+
+//end-point to get User Order Details
+app.get("/order/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const orders = await Order.find({ user: userId }).populate("user");
+
+    if (!orders || orders.length == 0) {
+      return res
+        .status(404)
+        .json({ message: "No Orders placed for thsi User  " });
+    }
+    return res.status(200).json({orders});
+  } catch (error) {
+    res.status(500).json({ message: "Error occured in Order Fetch Part" });
+  }
+});
 
 // ✅ 404 logging middleware (put this LAST)
 app.use((req, res) => {
@@ -219,8 +294,3 @@ app.use((req, res) => {
 });
 
 app.listen(port, () => console.log(`🚀 Server running on port ${port}`));
-
-
-
-
-

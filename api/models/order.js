@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    products:[
+    cartItems:[
         {
             name: {
                 type: String,
@@ -43,18 +43,6 @@ const orderSchema = new mongoose.Schema({
             required: true
         },
         landmark: {
-            type: String,
-            required: true
-        },
-        city: {
-            type: String,
-            required: true
-        },
-        state: {
-            type: String,
-            required: true
-        },
-        country: {
             type: String,
             required: true
         },

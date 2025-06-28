@@ -1,7 +1,7 @@
 //1st Addresss page part
 
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "expo-router";
+import { useFocusEffect, useNavigation } from "expo-router";
 import {
   Image,
   Pressable,
@@ -21,7 +21,7 @@ import {
 import { UserType } from "@/UserContext";
 import Feather from "@expo/vector-icons/Feather";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
@@ -35,7 +35,7 @@ const AddAddressScreen = () => {
  
   const { userId, setUserId } = useContext(UserType);
 
-  console.log("Selected Adress by Btn : ", selectedAddress);
+  // console.log("Selected Adress by Btn : ", selectedAddress);
   
 
   useEffect(() => {
@@ -94,6 +94,13 @@ const AddAddressScreen = () => {
       addresses
     );
   };
+
+  // Refresh the Address Screeen After the User Added a new Address to Show that Addresss
+    useFocusEffect(
+      useCallback(()=>{
+        fetchAddresses();
+      },[ ])
+    )
 
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>

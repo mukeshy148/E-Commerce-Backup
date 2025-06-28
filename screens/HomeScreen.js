@@ -326,6 +326,8 @@ const HomeScreen = () => {
 
   console.log("Addres from Home Screen : ", addresses);
 
+  
+
   const renderItemFN = ({ item }) => (
     <Pressable
       key={item.id}
@@ -750,7 +752,7 @@ const HomeScreen = () => {
                 .map((item, index) => (
                   <ProductItem item={item} key={index} />
                 ))}
-            </View>
+            </View> 
           </View>
         </ScrollView>
       </View>
