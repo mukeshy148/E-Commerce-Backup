@@ -34,14 +34,14 @@ const ProductItem = ({ item }) => {
   return (
     <Pressable
       style={{
-        marginHorizontal: wp(4.2),
+        marginHorizontal: wp(2.9),
         height: hp(32),
         justifyContent: "center",
         marginBottom: hp(5),
         alignItems: "center",
-        paddingLeft:wp(2.6)
-        // flexWrap:'wrap'
-
+        paddingLeft:wp(2.6),
+        flexWrap:'wrap',
+        // backgroundColor:'pink'
         
       }}
     >

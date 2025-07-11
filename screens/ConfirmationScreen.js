@@ -1,8 +1,16 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import RazorpayCheckout from "react-native-razorpay";
 
 import { useContext, useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -120,6 +128,51 @@ const ConfirmationScreen = () => {
       }
     } catch (error) {
       console.log("Error Occured in handlePlaceOrder Fn : ", error);
+    }
+  };
+
+  const pay = async () => {
+    try {
+      const options = {
+        description: "Adding to the Wallet",
+        currency: "INR",
+        name: "Amazon",
+        key: "rzp_test_34J10vzUmi3jU2",
+        amount: total,
+        prefill: {
+          name: "voidrazorpay@gmail.com",
+          contact: "9176872829",
+          name: "Razor Pay",
+        },
+        theme: {color:'#2dc0c6'},
+      };
+
+      const data = await RazorpayCheckout.open(options);
+      console.log("Razor Pay Data : ", data);
+      
+
+      const orderData = {
+        userId: userId,
+        cartItems: cart,
+        totalPrice: total,
+        shippingAddress: selectedAddress,
+        paymentMethod: "card",
+      };
+      console.log("Order Data being sent:", orderData);
+      const response = await axios.post(
+        "http://192.168.29.86:8000/orders",
+        orderData
+      );
+
+      if (response.status == 200) {
+        navigation.navigate("OrderScreen");
+        dispatch(clearCart());
+        console.log("Order Created Successfully : ", response.data.order);
+      } else {
+        console.log("Error while creating Order in ConfirmScreen.js", error);
+      }
+    } catch (error) {
+      console.log("Error from pay UPI : ", error);
     }
   };
 
@@ -607,7 +660,19 @@ const ConfirmationScreen = () => {
               <FontAwesome5 name="dot-circle" size={23} color="#0daab4" />
             ) : (
               <FontAwesome5
-                onPress={() => setSelectedOptions("card")}
+                onPress={() => {
+                  setSelectedOptions("card");
+                  Alert.alert("UPI/Debit Card", "Pay Online", [
+                    {
+                      text: "Cancel",
+                      onPress: () => console.log("Cancel Btn Is Presed"),
+                    },
+                    {
+                      text: "OK",
+                      onPress: () => pay(),
+                    },
+                  ]);
+                }}
                 name="circle"
                 size={23}
                 color="#00484f"

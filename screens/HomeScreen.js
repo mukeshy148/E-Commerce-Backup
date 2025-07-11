@@ -326,8 +326,6 @@ const HomeScreen = () => {
 
   console.log("Addres from Home Screen : ", addresses);
 
-  
-
   const renderItemFN = ({ item }) => (
     <Pressable
       key={item.id}
@@ -363,9 +361,10 @@ const HomeScreen = () => {
           fontFamily: "poppins-regular",
           // fontWeight: "bold",
           fontSize: wp(3),
+          // backgroundColor:'gray'
         }}
       >
-        {item?.name}
+        {item?.name}{" "}
       </Text>
     </Pressable>
   );
@@ -394,17 +393,44 @@ const HomeScreen = () => {
               gap: wp(2.5),
             }}
           >
+            <Image
+                      style={{
+                        height: hp(5),
+                        width: wp(33),
+                        resizeMode: "contain",
+                        position:'absolute',
+                        alignSelf:'center',
+                        zIndex: 1,
+                        alignSelf: "center",
+                        marginBottom:hp(1.6),
+                        left:wp(34)
+            
+                        // backgroundColor:'pink'
+                      }}
+                      source={require("../assets/images/Amazon Logo.png")}
+                    />
             {/* Now Empty Space for moving carousel with dev . name */}
-            {/* <View
-            style={{
-              backgroundColor: "#009DA3",
-              paddingVertical: 32,
-              paddingHorizontal: wp(47),
-              marginLeft: 12,
-              marginTop: wp(9.5),
-              position: "absolute",
-            }}
-          ></View> */}
+            <Pressable onPress={()=>navigation.navigate('CoderScreen')}
+              style={{
+                zIndex: 1,
+                position: "absolute",
+                marginTop: 40,
+              }}
+            >
+              <Image
+                style={{
+                  zIndex: 1,
+                  bottom:hp(2.9),
+                  width: wp(11.5),
+                  height: hp(6),
+                  marginTop: hp(3),
+                  marginLeft: wp(4.9),
+                  resizeMode: "contain",
+                  // backgroundColor:'pink'
+                }}
+                source={require("../assets/images/developer.png")}
+              />
+            </Pressable>
 
             {/* For Serach Icon and Text Input */}
             <Pressable style={styles.searchBoxContainer}>
@@ -502,7 +528,7 @@ const HomeScreen = () => {
             activeDotColor="#474747"
             paginationStyle={{
               /* Dots  Customization */
-              top: hp(25.5),
+              top: hp(27.5),
               gap: wp(1.3),
             }}
             dotStyle={styles.inactiveDot} //Inactive Customuztion
@@ -513,7 +539,7 @@ const HomeScreen = () => {
                 <Image
                   style={{
                     height: "98%",
-                    width: "96%",
+                    width: "95%",
                     resizeMode: "cover",
                     borderRadius: wp(3),
                   }}
@@ -528,12 +554,12 @@ const HomeScreen = () => {
               fontFamily: "poppins-semiBold",
               fontSize: wp(5),
               padding: wp(3),
-              fontWeight: "600",
+              // fontWeight: "600",
               marginTop: hp(2),
               marginBottom: hp(0.5),
             }}
           >
-            Trending Deals of the week
+            Trending Deals of the week!
           </Text>
 
           {/* All Phone Deals */}
@@ -752,7 +778,7 @@ const HomeScreen = () => {
                 .map((item, index) => (
                   <ProductItem item={item} key={index} />
                 ))}
-            </View> 
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -1009,19 +1035,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: wp(81),
     color: "black",
-    // fontWeight: "bold",
-    fontFamily: "roboto",
+    height: hp(10),
+    fontFamily: "amazon-bold",
+    // textAlignVertical:'center'
   },
   inactiveDot: {
-    width: wp(2.3),
-    height: hp(0.4),
-    borderRadius: 3,
-    marginHorizontal: 3,
+    width: wp(1.6),
+    height: hp(0.7),
+    borderRadius: wp(20),
+    marginHorizontal: wp(2),
   },
   activeDot: {
-    width: wp(4),
-    height: hp(0.5),
+    width: wp(3),
+    height: hp(0.69),
     borderRadius: 4,
-    marginHorizontal: 3,
+    marginHorizontal: wp(4),
   },
 });

@@ -17,7 +17,7 @@ import {
 import {
   decrementQuantity,
   incrementQuantity,
-  removeFromCart
+  removeFromCart,
 } from "../Reducer/CartReducer";
 
 import Entypo from "@expo/vector-icons/Entypo";
@@ -27,7 +27,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 
 const CartScreen = () => {
   //                        .store.js/CART/.CartReducer.js/intialState.cart
@@ -49,7 +48,7 @@ const CartScreen = () => {
   };
 
   const decreaseQuantity = (item) => {
-    dispatch(decrementQuantity(item)); 
+    dispatch(decrementQuantity(item));
   };
 
   const deleteItem = (item) => {
@@ -197,27 +196,30 @@ const CartScreen = () => {
           EMI available. See details
         </Text>
 
-        <Pressable onPress={()=>naviagtion.navigate('ConfirmScreen')}
-          style={{
-            backgroundColor: "#fadc03",
-            width: wp(85),
-            height: hp(5.8),
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: wp(20),
-            alignSelf: "center",
-            marginTop: hp(3),
-          }}
-        >
-          <Text
+        {cart.length>0 && (
+          <Pressable
+            onPress={() => naviagtion.navigate("ConfirmScreen")}
             style={{
-              fontFamily: "poppins-regular",
-              fontSize: wp(3.8),
+              backgroundColor: "#fadc03",
+              width: wp(85),
+              height: hp(5.8),
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: wp(20),
+              alignSelf: "center",
+              marginTop: hp(3),
             }}
           >
-            Proceed to buy {cart?.length} items
-          </Text>
-        </Pressable>
+            <Text
+              style={{
+                fontFamily: "poppins-regular",
+                fontSize: wp(3.8),
+              }}
+            >
+              Proceed to buy {cart?.length} items
+            </Text>
+          </Pressable>
+        )}
 
         <View
           style={{

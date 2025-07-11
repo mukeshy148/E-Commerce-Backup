@@ -181,7 +181,7 @@ const LoginScreen = () => {
           Keep me logged in
         </Text>
         <Text style={[styles.text, { color: "#5c99f9" }]}>
-          Forgot Password?
+          Forgot Password? {" "}
         </Text>
       </View>
 
@@ -203,8 +203,8 @@ const LoginScreen = () => {
           alignItems: "center",
         }}
       >
-        <Text style={[styles.text, { color: "#5f5f5f" }]}>New to Amazon?</Text>
-        <Text style={[styles.text, { color: "black" }]}>Create an account</Text>
+        <Text style={[styles.text, { color: "#5f5f5f" }]}>New to {""} Amazon?</Text>
+        <Text style={[styles.text, { color: "black" }]}>Create an{" "} account</Text>
       </TouchableOpacity>
     </View>
   );
@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "outfit-regular",
+    marginLeft:wp(2)
   },
   loginButton: {
     backgroundColor: "#f9bc50",
@@ -239,6 +240,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     marginTop: hp(13),
+    
   },
   btnText: {
     fontFamily: "outfit-semiBold",

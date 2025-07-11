@@ -68,7 +68,7 @@ const OrderScreen = () => {
           borderRadius: wp(20),
           marginTop: hp(3),
 
-          borderWidth: wp(2.2),
+          borderWidth: wp(2.2), 
           borderColor: "#ffaf0e",
         }}
       >

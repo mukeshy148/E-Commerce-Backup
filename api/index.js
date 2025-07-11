@@ -262,6 +262,8 @@ app.get("/profile/:userId", async (req, res) => {
         .status(500)
         .json({ message: "User Not found while fetching User Profile" });
     }
+    console.log("Profile api screeen :!!!!!!!!2 ", userId); 
+    
 
     return res.status(200).json({ user });
   } catch (error) {

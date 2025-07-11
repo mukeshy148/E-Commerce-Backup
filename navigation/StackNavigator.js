@@ -4,9 +4,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddAddressScreen from "../screens/AddAddressScreen";
 import AddressScreen from "../screens/AddressScreen";
 import CartScreen from "../screens/CartScreen";
+import CoderScreen from "../screens/CoderScreen";
 import ConfirmationScreen from "../screens/ConfirmationScreen";
 import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
+import MyOrders from "../screens/MyOrders";
 import OrderScreen from "../screens/OrderScreen";
 import ProductInfoScreen from "../screens/ProductInfoScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -52,7 +54,7 @@ export default function StackNavigator() {
             tabBarLabel: "Profile",
             tabBarLabelStyle: { fontSize: 11 },
 
-            headerShown: false,
+            // headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
                 <FontAwesome name="user" size={26} color="#00A6B0" />
@@ -95,6 +97,9 @@ export default function StackNavigator() {
       <Stack.Screen name="Add" component={AddressScreen} />
       <Stack.Screen name="ConfirmScreen" component={ConfirmationScreen} />
       <Stack.Screen name="OrderScreen" component={OrderScreen} />
+      <Stack.Screen name="MyOrderScreen" component={MyOrders} />
+
+      <Stack.Screen name="CoderScreen" component={CoderScreen} />
       {/* Add more screens here */}
     </Stack.Navigator>
   );
