@@ -33,6 +33,11 @@ mongoose
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
+app.get('/', (req, res) => {
+  res.send('Server is Live');
+});
+
+
 //Endpoint to Register a app
 
 const User = require("./models/user");
