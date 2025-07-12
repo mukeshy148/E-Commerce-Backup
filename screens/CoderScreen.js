@@ -245,7 +245,7 @@ const CoderScreen = () => {
                 marginBottom:-6
               }}
             >
-              LinkdIn
+              LinkedIn
             </Text>
             <Image
               style={styles.qrImage}

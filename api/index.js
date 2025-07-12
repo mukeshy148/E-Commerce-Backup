@@ -4,8 +4,11 @@ const mongoose = require("mongoose");
 const crypto = require("crypto");
 const nodeMailer = require("nodemailer");
 
+require("dotenv").config();
+
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
+
 const cors = require("cors");
 
 app.use(cors());
@@ -15,8 +18,7 @@ app.use(bodyParser.json());
 const jwt = require("jsonwebtoken");
 
 mongoose
-  .connect(
-    "mongodb+srv://Mukesh148y:Mukesh2005@cluster0.cjasoiz.mongodb.net/",
+  .connect(process.env.MONGO_URL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
