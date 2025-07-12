@@ -74,7 +74,7 @@ const ConfirmationScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.29.86:8000/address/${userId}`
+        `https://e-commerce-backup.onrender.com/address/${userId}`
       );
 
       const { addresses } = response.data;
@@ -115,7 +115,7 @@ const ConfirmationScreen = () => {
       };
       console.log("Order Data being sent:", orderData);
       const response = await axios.post(
-        "http://192.168.29.86:8000/orders",
+        "https://e-commerce-backup.onrender.com/orders",
         orderData
       );
 
@@ -144,12 +144,11 @@ const ConfirmationScreen = () => {
           contact: "9176872829",
           name: "Razor Pay",
         },
-        theme: {color:'#2dc0c6'},
+        theme: { color: "#2dc0c6" },
       };
 
       const data = await RazorpayCheckout.open(options);
       console.log("Razor Pay Data : ", data);
-      
 
       const orderData = {
         userId: userId,
@@ -160,7 +159,7 @@ const ConfirmationScreen = () => {
       };
       console.log("Order Data being sent:", orderData);
       const response = await axios.post(
-        "http://192.168.29.86:8000/orders",
+        "https://e-commerce-backup.onrender.com/orders",
         orderData
       );
 

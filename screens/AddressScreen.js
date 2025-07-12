@@ -75,7 +75,7 @@ const AddressScreen = () => {
     
 
     axios
-      .post("http://192.168.29.86:8000/address", { userId, address })
+      .post("https://e-commerce-backup.onrender.com/address", { userId, address })
       .then((response) => {
         console.log("Addresss is 123: ", address);
 

@@ -59,7 +59,7 @@ const ProfileScreen = () => {
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
-          `http://192.168.29.86:8000/profile/${userId}`
+          `https://e-commerce-backup.onrender.com/profile/${userId}`
         );
         const { user } = response.data;
         // console.log("Datas from  ProfileScreen : ", user);
@@ -76,7 +76,7 @@ const ProfileScreen = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await axios.get(
-        `http://192.168.29.86:8000/order/${userId}`
+        `https://e-commerce-backup.onrender.com/profile/${userId}`
       );
       const orders = response.data.orders;
 
@@ -116,7 +116,10 @@ const ProfileScreen = () => {
           flexDirection: "row",
         }}
       >
-        <Pressable onPress={()=>navigation.navigate('MyOrderScreen')} style={styles.buttons}>
+        <Pressable
+          onPress={() => navigation.navigate("MyOrderScreen")}
+          style={styles.buttons}
+        >
           <Text style={styles.btnText}>Your Orders</Text>
         </Pressable>
 

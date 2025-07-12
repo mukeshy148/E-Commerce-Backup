@@ -312,7 +312,7 @@ const HomeScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.29.86:8000/address/${userId}`
+        `https://e-commerce-backup.onrender.com/address/${userId}`
       );
 
       const { addresses } = response.data;
@@ -394,23 +394,24 @@ const HomeScreen = () => {
             }}
           >
             <Image
-                      style={{
-                        height: hp(5),
-                        width: wp(33),
-                        resizeMode: "contain",
-                        position:'absolute',
-                        alignSelf:'center',
-                        zIndex: 1,
-                        alignSelf: "center",
-                        marginBottom:hp(1.6),
-                        left:wp(34)
-            
-                        // backgroundColor:'pink'
-                      }}
-                      source={require("../assets/images/Amazon Logo.png")}
-                    />
+              style={{
+                height: hp(5),
+                width: wp(33),
+                resizeMode: "contain",
+                position: "absolute",
+                alignSelf: "center",
+                zIndex: 1,
+                alignSelf: "center",
+                marginBottom: hp(1.6),
+                left: wp(34),
+
+                // backgroundColor:'pink'
+              }}
+              source={require("../assets/images/Amazon Logo.png")}
+            />
             {/* Now Empty Space for moving carousel with dev . name */}
-            <Pressable onPress={()=>navigation.navigate('CoderScreen')}
+            <Pressable
+              onPress={() => navigation.navigate("CoderScreen")}
               style={{
                 zIndex: 1,
                 position: "absolute",
@@ -420,7 +421,7 @@ const HomeScreen = () => {
               <Image
                 style={{
                   zIndex: 1,
-                  bottom:hp(2.9),
+                  bottom: hp(2.9),
                   width: wp(11.5),
                   height: hp(6),
                   marginTop: hp(3),

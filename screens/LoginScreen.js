@@ -48,7 +48,7 @@ const LoginScreen = () => {
 
     //send a post request to the Backend
     axios
-      .post("http://192.168.29.86:8000/login", user)
+      .post("https://e-commerce-backup.onrender.com/login", user)
       .then((response) => {
         // console.log("Response after Login : ", response);
 

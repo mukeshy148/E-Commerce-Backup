@@ -32,11 +32,10 @@ const AddAddressScreen = () => {
   const navigation = useNavigation();
 
   const [addresses, setAddresses] = useState([]);
- 
+
   const { userId, setUserId } = useContext(UserType);
 
   // console.log("Selected Adress by Btn : ", selectedAddress);
-  
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -80,7 +79,7 @@ const AddAddressScreen = () => {
   const fetchAddresses = async () => {
     try {
       const response = await axios.get(
-        `http://192.168.29.86:8000/address/${userId}`
+        `https://e-commerce-backup.onrender.com/${userId}`
       );
 
       const { addresses } = response.data;
@@ -96,11 +95,11 @@ const AddAddressScreen = () => {
   };
 
   // Refresh the Address Screeen After the User Added a new Address to Show that Addresss
-    useFocusEffect(
-      useCallback(()=>{
-        fetchAddresses();
-      },[ ])
-    )
+  useFocusEffect(
+    useCallback(() => {
+      fetchAddresses();
+    }, [])
+  );
 
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
@@ -327,11 +326,13 @@ const AddAddressScreen = () => {
                   Ph No : {item?.mobileNo}.
                 </Text>
 
-                  {/* Buttons */}
-                <View style={{
-                  flexDirection:'row',
-                  marginLeft:wp(1.3)
-                }}>
+                {/* Buttons */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginLeft: wp(1.3),
+                  }}
+                >
                   {/* Edit Btn */}
                   <Pressable style={styles.smallBtns}>
                     <Text
@@ -399,13 +400,13 @@ const styles = StyleSheet.create({
     fontFamily: "roboto",
   },
   smallBtns: {
-    backgroundColor:'#ececec',
+    backgroundColor: "#ececec",
     alignItems: "center",
     marginTop: hp(1),
     marginBottom: hp(0.6),
     marginHorizontal: wp(1),
     paddingVertical: hp(0.7),
-    paddingHorizontal:wp(2.7),
+    paddingHorizontal: wp(2.7),
     borderWidth: wp(0.2),
     borderRadius: wp(2),
   },

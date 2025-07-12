@@ -34,7 +34,7 @@ const LoginScreen = () => {
 
     //send a post request to the Backend
     axios
-      .post("http://192.168.29.86:8000/register", user)
+      .post("https://e-commerce-backup.onrender.com/register", user)
       .then((response) => {
         console.log(response);
         Alert.alert("Success!", "Registration successful");

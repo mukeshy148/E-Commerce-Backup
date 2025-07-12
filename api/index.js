@@ -43,6 +43,8 @@ app.get('/', (req, res) => {
 const User = require("./models/user");
 const Order = require("./models/order");
 
+
+
 app.post("/register", async (req, res) => {
   console.log("Request body:", req.body);
 
@@ -91,7 +93,7 @@ const sendVerificationEmail = async (email, verificationToken) => {
     from: "amazonclone.com",
     to: email,
     subject: "Email Verification",
-    text: `Please verify your email by clicking on the following link: http://localhost:8000/verify/${verificationToken}`,
+    text: `Please verify your email by clicking on the following link: https://e-commerce-backup.onrender.com/verify/${verificationToken}`,
   };
 
   try {
