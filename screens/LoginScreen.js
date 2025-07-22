@@ -31,7 +31,7 @@ const LoginScreen = () => {
         const token = await AsyncStorage.getItem("authToken");
         console.log("After Login AsyncStrg  Token :  ", token);
         if (token) {
-          navigation.replace("Main");
+          navigation.replace("HomeScreen");
         }
       } catch (error) {
         console.log("Error checking login status:", error);

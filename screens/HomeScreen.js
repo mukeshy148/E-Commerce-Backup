@@ -31,6 +31,8 @@ import {
 import Swiper from "react-native-swiper";
 import { useSelector } from "react-redux";
 import ProductItem from "../components/ProductItem";
+
+import DummyTestPage from "./DummyTestPage";
 const HomeScreen = () => {
   const navigation = useNavigation();
 
@@ -287,6 +289,7 @@ const HomeScreen = () => {
         return;
       }
 
+      
       try {
         const decodedToken = jwt_decode(token);
         // console.log("Decoded JJJJJJJJJJJ:", decodedToken);
@@ -375,8 +378,8 @@ const HomeScreen = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <>
-      <View style={{ backgroundColor: "white", flex: 1 }}>
+    <View style={{ backgroundColor: "white", flex: 1 }}>
+      <View style={{ backgroundColor: "white", flex: 1 , marginBottom:hp(13)}}>
         <StatusBar
           translucent
           backgroundColor="transparent"
@@ -560,10 +563,10 @@ const HomeScreen = () => {
               marginBottom: hp(0.5),
             }}
           >
-            Trending Deals of the week!
+            Trending Deals of the week
           </Text>
 
-          {/* All Phone Deals */}
+          {/* All Phone Deals */}       
           <View
             style={{
               flexDirection: "row",
@@ -1011,11 +1014,16 @@ const HomeScreen = () => {
                 </Text>
               </View>
             </View>
+            
           </View>
         </ModalContent>
+        
       </BottomModal>
-    </>
+      <DummyTestPage/>
+    </View>
+    
   );
+  
 };
 
 export default HomeScreen;

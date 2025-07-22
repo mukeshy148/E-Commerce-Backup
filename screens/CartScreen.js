@@ -27,6 +27,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DummyTestPage from "./DummyTestPage";
 
 const CartScreen = () => {
   //                        .store.js/CART/.CartReducer.js/intialState.cart
@@ -56,10 +57,11 @@ const CartScreen = () => {
   };
 
   return (
+    <View style={{ flex: 1,
+        backgroundColor: "#ffff",}}>
     <View
       style={{
-        flex: 1,
-        backgroundColor: "#ffff",
+       marginBottom:hp(10)
       }}
     >
       <StatusBar
@@ -486,6 +488,9 @@ const CartScreen = () => {
           ))}
         </View>
       </ScrollView>
+      
+    </View>
+    <DummyTestPage/>
     </View>
   );
 };

@@ -55,7 +55,7 @@ const OrderScreen = () => {
         onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{ name: "Main" }],
+            routes: [{ name: "HomeScreen" }],
           })
         }
         style={{

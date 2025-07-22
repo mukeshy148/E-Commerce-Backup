@@ -13,12 +13,16 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
+import DummyTestPage from "./DummyTestPage";
+
 const ProfileScreen = () => {
   const { userId, setUserId } = useContext(UserType);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [user, setUser] = useState(null);
   const navigation = useNavigation();
+
+  // Set header
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: "",
@@ -32,7 +36,6 @@ const ProfileScreen = () => {
             height: hp(10),
             width: wp(33),
             marginLeft: wp(3),
-            // backgroundColor:'pink'
           }}
           source={{
             uri: "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c518.png",
@@ -40,82 +43,67 @@ const ProfileScreen = () => {
         />
       ),
       headerRight: () => (
-        <View
-          style={{
-            flexDirection: "row",
-            gap: wp(3),
-            marginRight: wp(6),
-          }}
-        >
+        <View style={{ flexDirection: "row", gap: wp(3), marginRight: wp(6) }}>
           <Ionicons name="notifications-outline" size={24} color="black" />
           <AntDesign name="search1" size={24} color="black" />
         </View>
       ),
     });
-  }, []);
+  }, [navigation]);
 
-  const [user, setUser] = useState();
+  // Fetch user profile
   useEffect(() => {
+    if (!userId) return;
+
     const fetchUserProfile = async () => {
       try {
         const response = await axios.get(
           `https://e-commerce-backup.onrender.com/profile/${userId}`
         );
-        const { user } = response.data;
-        // console.log("Datas from  ProfileScreen : ", user);
-
-        setUser(user);
+        setUser(response.data.user);
       } catch (error) {
-        console.log("Error in ProfileScreen123 : ", error);
+        console.log("Error fetching user profile:", error);
       }
     };
+
     fetchUserProfile();
-  }, []);
+  }, [userId]); // ✅ Add dependency
 
-  // to fetch Order Details
+  // Fetch order details
   useEffect(() => {
-    const fetchOrders = async () => {
-      const response = await axios.get(
-        `https://e-commerce-backup.onrender.com/profile/${userId}`
-      );
-      const orders = response.data.orders;
+    if (!userId) return;
 
-      setOrders(orders);
-      setLoading(false);
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get(
+          `https://e-commerce-backup.onrender.com/profile/${userId}`
+        );
+        setOrders(response.data.orders);
+        setLoading(false);
+      } catch (error) {
+        console.log("Error fetching orders:", error);
+      }
     };
 
     fetchOrders();
-  }, []);
+  }, [userId]); // ✅ Add dependency
 
-  console.log("Orders fetched from DB : ", orders);
-
-  const logout = () => {
-    clearAuthToken();
-  };
-
-  const clearAuthToken = async () => {
+  const logout = async () => {
     await AsyncStorage.removeItem("authToken");
-    console.log("Auth Token is Removed by Logout");
+    console.log("Auth Token removed");
     navigation.replace("LoginScreen");
   };
+
   return (
-    <View>
-      <Text
-        style={{
-          fontFamily: "amazon-bold",
-          fontSize: wp(5.7),
-          margin: wp(3),
-          marginTop: hp(3.7),
-        }}
-      >
-        Welcome {user?.name}{" "}
+    <View style={{ backgroundColor: "white", flex: 1 }}>
+    <View style={{
+      marginTop:hp(10)
+    }}>
+      <Text style={styles.welcomeText}>
+        Welcome {user?.name || "User"}
       </Text>
 
-      <View
-        style={{
-          flexDirection: "row",
-        }}
-      >
+      <View style={styles.row}>
         <Pressable
           onPress={() => navigation.navigate("MyOrderScreen")}
           style={styles.buttons}
@@ -128,22 +116,18 @@ const ProfileScreen = () => {
         </Pressable>
       </View>
 
-      <View
-        style={{
-          flexDirection: "row",
-        }}
-      >
-        <Pressable style={[styles.buttons, { marginTop: hp(0) }]}>
+      <View style={styles.row}>
+        <Pressable style={[styles.buttons]}>
           <Text style={styles.btnText}>Buy Again</Text>
         </Pressable>
 
-        <Pressable
-          onPress={logout}
-          style={[styles.buttons, { marginTop: hp(0) }]}
-        >
+        <Pressable onPress={logout} style={styles.buttons}>
           <Text>Logout</Text>
         </Pressable>
       </View>
+      
+    </View>
+    <DummyTestPage/>
     </View>
   );
 };
@@ -151,6 +135,15 @@ const ProfileScreen = () => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
+  welcomeText: {
+    fontFamily: "amazon-bold",
+    fontSize: wp(5.7),
+    margin: wp(3),
+    marginTop: hp(3.7),
+  },
+  row: {
+    flexDirection: "row",
+  },
   buttons: {
     backgroundColor: "#c3c3c3",
     paddingVertical: hp(1.7),
