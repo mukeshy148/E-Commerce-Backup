@@ -56,7 +56,7 @@ const LoginScreen = () => {
 
         //It is for to save that JWT key given from response
         AsyncStorage.setItem("authToken", token);
-        navigation.replace("Main");
+        navigation.replace("HomeScreen");
         console.log("While Login Token Async : ", token);
       })
       .catch((error) => {
