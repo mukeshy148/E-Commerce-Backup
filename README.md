@@ -1,50 +1,44 @@
-# Welcome to your Expo app 👋
+Amazon Clone - React Native 🛒📱
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A fully functional Amazon clone mobile app built with React Native and JavaScript featuring user authentication, product browsing, cart management, and order processing.
 
-## Get started
 
-1. Install dependencies
+Features ✨
 
-   ```bash
-   npm install
-   ```
+🔐 User authentication with JWT (signup, login, logout)
 
-2. Start the app
+🛍️ Product listing and detailed product view
 
-   ```bash
-   npx expo start
-   ```
+🛒 Cart management with Redux Toolkit state management
 
-In the output, you'll find options to open the app in a
+💾 Persistent storage using AsyncStorage
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+⚙️ Backend REST API built with Node.js and Express.js
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+🗄️ MongoDB as database for storing users, products, and orders
 
-## Get a fresh project
+📧 Email verification using Nodemailer
 
-When you're ready, run:
+🚀 React Navigation for smooth screen transitions
 
-```bash
-npm run reset-project
-```
+📡 Axios for API requests and data fetching
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+☁️ Hosted backend API on Render
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
+Tech Stack 🛠️
 
-Join our community of developers creating universal apps.
+Frontend: React Native (JavaScript), Redux Toolkit, React Navigation, AsyncStorage
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Backend: Node.js, Express.js, MongoDB, JWT Authentication, Nodemailer (Email Verification)
+
+API Integration: RESTful API using Axios
+
+Hosting: Render
+
+
+Contact 📬
+
+Created by Mukesh Y — feel free to reach out at mukesh148y@gmail.com
